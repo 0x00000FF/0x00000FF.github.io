@@ -1,3 +1,10 @@
-theme: jekyll-theme-minimal
+locale: "en-US"
+
+title: "0x00000FF"
+title_separator:: " :: "
+
+name: "0x00000FF"
+description: "a blog"
+
 url: "https://blog.patche.me"
 baseurl: ""
