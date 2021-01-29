@@ -1,0 +1,44 @@
+@import url("../lib/fonts/ibm-plex/font.css");
+
+*    { margin: 0; padding: 0 }
+html { height: 100%; }
+body { background-color: #151515; min-height: 100%; font-family: 'IBMPlexMono'; }
+
+.hide { display: none; }
+
+container {
+    display: block;
+    min-height: 100%;
+    padding: 20px;
+    color  : #a0a0a0;
+}
+
+line {
+    display: block;
+    width: auto;
+    min-height: 1em;
+    line-height: 1.5em;
+}
+
+command-line {
+    display: flex;
+}
+
+caret {
+    font-weight: 900;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
