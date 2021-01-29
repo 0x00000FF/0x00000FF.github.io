@@ -26,6 +26,10 @@ command-line {
     flex-wrap: wrap;
 }
 
+user {
+    color: #00ff00;
+}
+
 buffer {
     word-break: break-all;
 }
