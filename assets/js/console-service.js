@@ -158,7 +158,7 @@
         });
 
         $("container").on('click', function (e) {
-            $(".mobile-assistant").focus();
+            $(".mobile-assistant").click();
         });
 
         $(".mobile-assistant").on("keydown", function (e) {
