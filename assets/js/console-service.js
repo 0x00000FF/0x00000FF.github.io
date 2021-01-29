@@ -63,6 +63,7 @@
                 case "F10":
                 case "F11":
                 case "F12":
+                case "Meta":
                 case "HangulMode":
                 case "CapsLock":
                 case "ScrollLock":
