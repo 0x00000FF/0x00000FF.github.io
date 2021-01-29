@@ -41,9 +41,6 @@
                     const preserveStr = commandContainer.innerText.slice(0, -1);
                     const cmdStr = buffer.join('').trim();
 
-                    if (cmdStr.length === 0)
-                        break;
-
                     buffer = [];
 
                     prependStreamLine(preserveStr.replace("\n", ""));
@@ -116,7 +113,7 @@
         }
 
         function beginCommand(cmd) {
-            if (!inputMode) return;
+            if (!inputMode || cmd.length === 0) return;
 
             inputMode = false;
             console.log("[COMMAND] " + cmd);
@@ -132,6 +129,10 @@
             }
             else if (cmd === "help") {
                 $.get("/help")
+                 .done(response => prependStream(response));
+            }
+            else if (cmd === "list") {
+                $.get("/list")
                  .done(response => prependStream(response));
             }
             else {
