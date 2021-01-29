@@ -157,6 +157,15 @@
             inputChar(e);
         });
 
+        $("container").on('click', function (e) {
+            $(".mobile-assistant").focus();
+        });
+
+        $(".mobile-assistant").on("keydown", function (e) {
+            documentBody.dispatchEvent(new KeyboardEvent("keydown", e));
+            $(this).val("");
+        });
+
         restoreCommand();
     });
 })(jQuery);

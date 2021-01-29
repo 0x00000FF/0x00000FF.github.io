@@ -5,6 +5,7 @@ html { height: 100%; }
 body { background-color: #151515; min-height: 100%; font-family: 'IBMPlexMono'; }
 
 .hide { display: none; }
+.mobile-assistant { visibility: hidden; }
 
 container {
     display: block;
