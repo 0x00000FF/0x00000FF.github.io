@@ -41,6 +41,9 @@
                     const preserveStr = commandContainer.innerText.slice(0, -1);
                     const cmdStr = buffer.join('').trim();
 
+                    if (cmdStr.length === 0)
+                        break;
+
                     buffer = [];
 
                     prependStreamLine(preserveStr.replace("\n", ""));
