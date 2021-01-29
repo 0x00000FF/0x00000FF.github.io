@@ -28,6 +28,10 @@
             const shiftKey   = stroke.shiftKey;
             const controlKey = stroke.controlKey;
 
+            if (controlKey) {
+                return;
+            }
+
             switch(stroke.key) {
                 case "Backspace":
                     buffer.pop();
@@ -121,6 +125,10 @@
             }
             else if (cmd === "profile") {
                 $.get("/profile")
+                 .done(response => prependStream(response));
+            }
+            else if (cmd === "help") {
+                $.get("/help")
                  .done(response => prependStream(response));
             }
             else {
