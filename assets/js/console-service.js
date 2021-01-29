@@ -109,7 +109,7 @@
 
             commandBuffer.innerHTML = buffer.join('')
                                             .split(' ')
-                                            .join("&nbsp;");
+                                            .join("&nbsp;") + "<caret>_</caret>";
         }
 
         function beginCommand(cmd) {
