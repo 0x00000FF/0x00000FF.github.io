@@ -1,10 +1,8 @@
 (function ($) {
     $(function () {
-        let inputMode        = true;
-        let buffer           = [];
         let history          = [];
         let historyIdx       = history.length;
-        let documentBody     = document.querySelector("body");
+        let documentBody     = document.body;
         let commandContainer = document.querySelector("command-line");
         let commandBuffer    = document.querySelector("buffer");
         let consoleCaret     = document.querySelector("caret");
@@ -23,106 +21,54 @@
                     });
         }
 
-        function inputChar(keyEvent) {
-            const stroke     = keyEvent.originalEvent;
-            const shiftKey   = stroke.shiftKey;
-            const controlKey = stroke.controlKey;
+        function clearBuffer() {
+            $(".mobile-assistance").val("");
+        }
 
-            if (controlKey) {
-                return;
-            }
+        function syncBuffer() {
+            commandBuffer.innerHTML = $(".mobile-assistant").val()  + consoleCaret.outerHTML;
+        }
+
+        function processSpecialKeys(keyEvent) {
+            const stroke      = keyEvent;
 
             switch(stroke.key) {
-                case "Backspace":
-                    buffer.pop();
-                    break;
-
-                case "Enter":
-                    const preserveStr = commandContainer.innerText.slice(0, -1);
-                    const cmdStr = buffer.join('').trim();
-
-                    buffer = [];
-
-                    prependStreamLine(preserveStr.replace("\n", ""));
-                    $(commandContainer).addClass("hide");
-
-                    beginCommand(cmdStr);
-                    restoreCommand();
-
-                    break;
-
-                case "F1":
-                case "F2":
-                case "F3":
-                case "F4":
-                case "F5":
-                case "F6":
-                case "F7":
-                case "F8":
-                case "F9":
-                case "F10":
-                case "F11":
-                case "F12":
-                case "Meta":
-                case "HangulMode":
-                case "CapsLock":
-                case "ScrollLock":
-                case "NumLock":
-                case "Insert":
-                case "Delete":
-                case "Home":
-                case "End":
-                case "PageUp":
-                case "PageDown":
-                case "Pause":
-                case "ArrowLeft":
-                case "ArrowRight":
-                case "Shift":
-                case "Control":
-                case "Alt":
-                case "Tab":
+                case "Escape":
+                    clearBuffer();
                     break;
 
                 case "ArrowUp":
                     if (historyIdx <= 0) return; 
-
+    
                     historyIdx--;
-                    buffer = history[historyIdx].split();
-
+                    $(".mobile-assistance").val(history[historyIdx]);
+    
                     break;
-
+    
                 case "ArrowDown":
                     if (historyIdx >= history.length) {
-                        buffer = [];
+                        clearBuffer();
                     } else {
                         historyIdx++;
-
+    
                         if (historyIdx < history.length)
-                            buffer = history[historyIdx].split();
+                            $(".mobile-assistance").val(history[historyIdx]);
                         else
-                            buffer = [];
+                            $(".mobile-assistance").val("");
                     }
                     break;
                 
                 default:
-                    buffer.push(stroke.key);
+                    break;
             }
 
-            commandBuffer.innerHTML = buffer.join('')
-                                            .split(' ')
-                                            .join("&nbsp;") + "<caret>_</caret>";
+            syncBuffer();
         }
 
         function beginCommand(cmd) {
-            if (!inputMode) return;
-
-            inputMode = false;
-
-            if (cmd.length === 0) return;
-
-            console.log("[COMMAND] " + cmd);
-
-            if (cmd === "clear") {
+            if (cmd.length === 0 || cmd.startsWith('#')) 
+                return;
+            else if (cmd === "clear") {
                 [...document.querySelectorAll("container > *")]
                     .filter(elem => elem.tagName.toLowerCase() != "command-line")
                     .forEach(elem => elem.remove());
@@ -148,30 +94,39 @@
         }
         
         function restoreCommand() {
-            if (inputMode) return;
-
             $(commandContainer).removeClass("hide");
-            inputMode = true;
+            
+            $(".mobile-assistant").val("");
+            $(".mobile-assistant").focus();
+
+            syncBuffer();
         }
 
-        $(window).on('focus', function (e) {
-            documentBody.focus();
-        });
-
-        $(window).on('keydown', function (e) {
-            if (e.target.tagName !== documentBody.tagName || 
-                !inputMode) return;
-
-            inputChar(e);
-        });
-
-        $("container").on('click', function (e) {    
+        $(documentBody).on('click', function (e) {    
             $(".mobile-assistant").focus();
         });
 
-        $(".mobile-assistant").on("keydown", function (e) {
-            documentBody.dispatchEvent(new KeyboardEvent("keydown", e));
-            $(this).val("");
+        $("form").on('submit', function (e) {
+            const preserveStr = commandContainer.innerText.slice(0, -1);
+            const cmdStr      = $(".mobile-assistant").val();
+
+            prependStreamLine(preserveStr.replace("\n", ""));
+            $(commandContainer).addClass("hide");
+
+            console.log("[COMMAND] " + cmdStr);
+
+            beginCommand(cmdStr);
+            restoreCommand();
+
+            e.preventDefault();
+        });
+
+        $(".mobile-assistant").on('input', function (e) {
+            syncBuffer();
+        });
+
+        $(".mobile-assistant").on('keydown', function (e) {
+            processSpecialKeys(e.originalEvent);
         });
 
         restoreCommand();

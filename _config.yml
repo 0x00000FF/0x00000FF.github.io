@@ -6,7 +6,7 @@ title            : "0x00000FF"
 title_separator  : " :: "
 
 name             : "0x00000FF"
-description      : "a blog"
+description      : "0x00000FF's private storage"
 
 url              : "https://blog.patche.me"
 baseurl          : ""
@@ -17,7 +17,3 @@ exclude          : [ "Gemfile", "Gemfile.lock", "_site" ]
 kramdown:
     syntax_highlighter_opts:
         disable: true
-
-webrick:
-    headers:
-        Content-Security-Policy: default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self';

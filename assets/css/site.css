@@ -9,7 +9,16 @@ a:hover   { color: #55f; }
 a:visited { color: #55f; }
 
 .hide { display: none; }
-.mobile-assistant { height: 20px; width: 20px; position: absolute; left: -30px; top: -30px; }
+.mobile-assistant { 
+    width: 100vw; color: transparent; position: absolute; 
+    left: 0; bottom: 0; background: transparent; 
+    border: 0; resize: none; opacity: .01; }
+.mobile-assistant:focus {
+    outline: none;
+}
+.mobile-assistant + input[type=submit] {
+    display: none;
+}
 
 .red   { color: #f00 }
 .green { color: #0f0 }
