@@ -7,6 +7,11 @@ body { background-color: #151515; min-height: 100%; font-family: 'IBMPlexMono'; 
 .hide { display: none; }
 .mobile-assistant { height: 20px; width: 20px; position: absolute; left: -30px; top: -30px; }
 
+.red   { color: #f00 }
+.green { color: #0f0 }
+.blue  { color: #00f }
+
+
 container {
     display: block;
     min-height: 100%;
@@ -24,10 +29,6 @@ line {
 command-line {
     display: flex;
     flex-wrap: wrap;
-}
-
-user {
-    color: #00ff00;
 }
 
 buffer {
