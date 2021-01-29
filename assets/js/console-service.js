@@ -157,7 +157,7 @@
             inputChar(e);
         });
 
-        $("container").on('tapone', function (e) {    
+        $("container").on('click', function (e) {    
             $(".mobile-assistant").trigger('click');
         });
 
