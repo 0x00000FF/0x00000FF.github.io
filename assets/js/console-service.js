@@ -158,9 +158,7 @@
         });
 
         $("container").on('tapone', function (e) {    
-            $(".mobile-assistant").click();
-            $(".mobile-assistant").focus();
-            $(".mobile-assistant").click();
+            $(".mobile-assistant").trigger('click');
         });
 
         $(".mobile-assistant").on("keydown", function (e) {
