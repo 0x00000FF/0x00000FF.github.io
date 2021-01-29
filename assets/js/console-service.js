@@ -113,9 +113,12 @@
         }
 
         function beginCommand(cmd) {
-            if (!inputMode || cmd.length === 0) return;
+            if (!inputMode) return;
 
             inputMode = false;
+
+            if (cmd.length === 0) return;
+
             console.log("[COMMAND] " + cmd);
 
             if (cmd === "clear") {

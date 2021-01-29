@@ -3,7 +3,7 @@ permalink: /list
 ---
 
 {% for post in site.posts %}
-  <line>{{post.id}} {{ post.title }}</line>
+  <line><span class="post-id green">{{post.id}}</span> {{ post.title }}</line>
 {% else %}
   <line>This directory is empty.</line>
 {% endfor %}

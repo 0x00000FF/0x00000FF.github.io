@@ -40,6 +40,10 @@ caret {
     animation: blink 1s infinite;
 }
 
+.post-id {
+    width: 120px;
+}
+
 @keyframes blink {
     0% {
         opacity: 0;
