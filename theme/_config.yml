@@ -10,7 +10,6 @@ description      : "a blog"
 
 url              : "https://blog.patche.me"
 baseurl          : ""
-permalink        : "/post/:title"
 
 include          : [ "assets" ]
 exclude          : [ "Gemfile", "Gemfile.lock", "_site" ]
