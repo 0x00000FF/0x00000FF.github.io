@@ -2,7 +2,16 @@
 permalink: "/help"
 ---
 
-<line>help&nbsp;&nbsp;- show this message</line>
+<line class="blue">*** global commands ***</line>
+<line>help - show this message</line>
+<line>profile - show profile of system admin</line>
 <line>clear - clear all prints on this screen</line>
-<line>list&nbsp;&nbsp;- list 10 recent posts of this blog</line>
+<line>list [keyword] [criteria=title] [count=10] [page=2] - list or search recent posts of this blog with given amount</line>
+<line class="indent">[<span class="red">*</span>] arguments are unordered.</line>
 <line>read [post-id|list-id] - read post </line>
+<line class="blue">*** read mode only ***</line>
+<line>download [file-id] download a file with given file id </line>
+<line>comment (-m|-d) [writer] [content] [password=null] leave comment with given writer name and content</line>
+<line class="indent">[<span class="red">*</span>] comment without password cannot be modified or removed!</line>
+<line class="indent">-m: modify comment, requires password</line>
+<line class="indent">-d: delete comment, requires password</line>

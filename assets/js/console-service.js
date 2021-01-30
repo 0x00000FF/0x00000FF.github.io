@@ -112,7 +112,7 @@
         });
 
         $("form").on('submit', function (e) {
-            const preserveStr = commandContainer.innerText.slice(0, -1);
+            const preserveStr = commandContainer.innerText;
             const cmdStr      = $(".mobile-assistant").val();
 
             prependStreamLine(preserveStr.replace("\n", ""));
