@@ -10,9 +10,9 @@ a:visited { color: #55f; }
 
 .hide { display: none; }
 .mobile-assistant { 
-    width: 100vw; color: transparent; position: absolute; 
+    width: 100vw; color: transparent; position: fixed; 
     left: 0; top: 0; background: transparent; color: transparent;
-    border: 0; resize: none; opacity: .01; }
+    border: 0; resize: none; opacity: .001; }
 .mobile-assistant:focus {
     outline: none;
 }

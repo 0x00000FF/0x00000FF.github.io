@@ -22,7 +22,7 @@
         }
 
         function clearBuffer() {
-            $(".mobile-assistance").val("");
+            $(".mobile-assistant").val("");
         }
 
         function syncBuffer() {
@@ -66,12 +66,17 @@
         }
 
         function beginCommand(cmd) {
+            // this must be refactored
             if (cmd.length === 0 || cmd.startsWith('#')) 
                 return;
             else if (cmd === "clear") {
                 [...document.querySelectorAll("container > *")]
                     .filter(elem => elem.tagName.toLowerCase() != "command-line")
                     .forEach(elem => elem.remove());
+            }
+            else if (cmd === "bash") {
+                $.get("/banner")
+                .done(response => prependStream(response));
             }
             else if (cmd === "profile") {
                 $.get("/profile")
@@ -94,12 +99,12 @@
         }
         
         function restoreCommand() {
-            $(commandContainer).removeClass("hide");
-            
-            $(".mobile-assistant").val("");
-            $(".mobile-assistant").focus();
+            $(commandContainer).removeClass("hide");            
 
+            clearBuffer();
             syncBuffer();
+        
+            $(".mobile-assistant").focus();
         }
 
         $(documentBody).on('click', function (e) {    
@@ -117,7 +122,7 @@
 
             beginCommand(cmdStr);
             restoreCommand();
-
+            
             e.preventDefault();
         });
 
@@ -129,6 +134,10 @@
             processSpecialKeys(e.originalEvent);
         });
 
-        restoreCommand();
+        $.get("/banner")
+         .done(response => {
+            prependStream(response);
+            restoreCommand();
+         });
     });
 })(jQuery);
